@@ -44,15 +44,6 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use(async (req, res, next) => {
-  try {
-    await connectToDatabase();
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'ok',
@@ -61,6 +52,15 @@ app.get('/api/health', (req, res) => {
     authStore: 'MongoDB Atlas',
     timestamp: new Date().toISOString(),
   });
+});
+
+app.use(async (req, res, next) => {
+  try {
+    await connectToDatabase();
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.use('/api/auth', authRoutes);

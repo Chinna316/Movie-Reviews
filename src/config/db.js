@@ -21,6 +21,9 @@ async function connectToDatabase() {
     global.mongooseCache.promise = mongoose
       .connect(env.mongodbUri, {
         bufferCommands: false,
+        connectTimeoutMS: 10000,
+        serverSelectionTimeoutMS: 10000,
+        socketTimeoutMS: 15000,
       })
       .then((mongooseInstance) => mongooseInstance);
   }
