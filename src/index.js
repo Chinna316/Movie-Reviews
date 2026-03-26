@@ -10,14 +10,7 @@ const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/error');
 
 const app = express();
-const databaseBackedPaths = [
-  '/api/auth',
-  '/auth',
-  '/api/movies',
-  '/movies',
-  '/api/reviews',
-  '/reviews',
-];
+const databaseBackedPaths = ['/api/auth', '/api/movies', '/api/reviews'];
 
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
@@ -52,7 +45,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get(['/api/health', '/health'], (req, res) => {
+app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'ok',
     mode: 'live',
@@ -71,9 +64,9 @@ app.use(databaseBackedPaths, async (req, res, next) => {
   }
 });
 
-app.use(['/api/auth', '/auth'], authRoutes);
-app.use(['/api/movies', '/movies'], movieRoutes);
-app.use(['/api/reviews', '/reviews'], reviewRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -125,5 +125,4 @@ Notes:
 - Do not commit a real `.env` file to GitHub.
 - If a secret was ever committed or shared accidentally, rotate it before deploying.
 - The backend now fails fast when required env vars are missing or when `JWT_SECRET` is too short.
-
-The serverless entrypoint is [api/index.js](/Users/chinnaannepu/Movie-Reviews/api/index.js), which wraps the Express app for Vercel.
+- Vercel can deploy the exported Express app in [src/index.js](/Users/chinnaannepu/Movie-Reviews/src/index.js) directly, so no custom rewrite or `serverless-http` wrapper is required.
